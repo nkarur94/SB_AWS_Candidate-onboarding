@@ -36,7 +36,12 @@ public class CandidateOnboardingService implements ICandidateOnboardingService {
 		CandidateOnboardingEntity entity = new CandidateOnboardingEntity(candidateDTO);
 
 		entity.setCreatorStamp(LocalDate.now());
-
+		BankInfoEntity bankEntity =  bankRepo.findById(candidateDTO.bId).orElseThrow();
+		entity.setBankEntity(bankEntity);
+		
+		QualificationInfoEntity qualificationEntity = qualificationRepo.findById(candidateDTO.qId).orElseThrow();
+		entity.setQualificationEntity(qualificationEntity);
+		
 		candidateRepo.save(entity);
 
 		ResponseDTO response = new ResponseDTO("saved candidate onboarding details", entity);
@@ -119,17 +124,98 @@ public class CandidateOnboardingService implements ICandidateOnboardingService {
 
 		ResponseDTO response = new ResponseDTO("deleted successfully ");
 		return response;
-		
+
 	}
 
 	@Override
 	public ResponseDTO deleteQualificationDetails(Long qId) {
 		// TODO Auto-generated method stub
-		QualificationInfoEntity entity = qualificationRepo.findById(qId).
-				orElseThrow(() -> new CandidateOnboardingException("id not found"));
+		QualificationInfoEntity entity = qualificationRepo.findById(qId)
+				.orElseThrow(() -> new CandidateOnboardingException("id not found"));
 		qualificationRepo.delete(entity);
-		
+
 		ResponseDTO response = new ResponseDTO("deleted successfully ");
+		return response;
+	}
+
+	@Override
+	public ResponseDTO updateBankInfoById(Long bId, BankInfoDTO bankDTO) {
+		// TODO Auto-generated method stub
+		BankInfoEntity entity = new BankInfoEntity(bankDTO);
+		bankRepo.findById(bId).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+
+		entity.setBId(bId);
+		bankRepo.save(entity);
+		
+		ResponseDTO response = new ResponseDTO("bank details updated", entity);
+
+		return response;
+	}
+
+	@Override
+	public ResponseDTO updateQualificationById(Long qId, QualificationInfoDTO qualificationDTO) {
+		// TODO Auto-generated method stub
+		QualificationInfoEntity entity = new QualificationInfoEntity(qualificationDTO);
+		qualificationRepo.findById(qId).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+
+		entity.setQId(qId);
+		qualificationRepo.save(entity);
+		
+		
+		ResponseDTO response = new ResponseDTO("qualification details updated", entity);
+
+		return response;
+	}
+
+	@Override
+	public ResponseDTO updateCandidateOnboardingById(Long id, CandidateOnboardingDTO candidateDTO) {
+		// TODO Auto-generated method stub
+		
+		CandidateOnboardingEntity entity = new CandidateOnboardingEntity(candidateDTO);
+		candidateRepo.findById(id).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+		
+		entity.setId(id);
+		
+		candidateRepo.save(entity);
+		
+		ResponseDTO response = new ResponseDTO("candidate details updated", entity);
+
+		return response;
+	}
+
+	@Override
+	public ResponseDTO viewCandidateById(Long id) {
+		// TODO Auto-generated method stub
+		CandidateOnboardingEntity entity = candidateRepo.findById(id).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+		
+		ResponseDTO response = new ResponseDTO("candidate details of id:"+id, entity);
+
+		return response;
+	}
+
+	@Override
+	public ResponseDTO viewBankInfoById(Long bId) {
+		// TODO Auto-generated method stub
+		BankInfoEntity entity = bankRepo.findById(bId).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+		
+		ResponseDTO response = new ResponseDTO("Bank details of id:"+bId, entity);
+
+		return response;
+	}
+
+	@Override
+	public ResponseDTO viewQualificationInfoById(Long qId) {
+		// TODO Auto-generated method stub
+		QualificationInfoEntity entity = qualificationRepo.findById(qId).
+		orElseThrow(() -> new  CandidateOnboardingException("candidate id not found"));
+		
+		ResponseDTO response = new ResponseDTO("Qualification details of id:"+qId, entity);
+
 		return response;
 	}
 

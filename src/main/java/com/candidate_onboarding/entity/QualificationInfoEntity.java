@@ -20,6 +20,7 @@ public class QualificationInfoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long qId;
+	
 	private boolean diploma;
 	private String degree;
 	private String field;

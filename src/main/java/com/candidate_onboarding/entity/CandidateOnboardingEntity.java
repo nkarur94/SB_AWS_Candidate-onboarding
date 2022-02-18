@@ -43,6 +43,7 @@ public class CandidateOnboardingEntity {
 	private LocalDate creatorStamp;
 	private LocalDate updateStamp;
 	
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name= "bId")
 	private BankInfoEntity bankEntity;

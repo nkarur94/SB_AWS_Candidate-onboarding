@@ -19,5 +19,16 @@ public interface ICandidateOnboardingService {
 	public ResponseDTO deleteBankInfoDetails(Long bId);
 	public ResponseDTO deleteQualificationDetails(Long qId);
 	
+	public ResponseDTO updateBankInfoById(Long bId, BankInfoDTO bankDTO);
+	public ResponseDTO updateQualificationById(Long qId, QualificationInfoDTO qualificationDTO);
+	public ResponseDTO updateCandidateOnboardingById(Long id, CandidateOnboardingDTO candidateDTO);
+	
+	
+	public ResponseDTO viewCandidateById(Long id);
+	public ResponseDTO viewBankInfoById(Long bId);
+	public ResponseDTO viewQualificationInfoById(Long qId);
+	
+	
+	
 
 }

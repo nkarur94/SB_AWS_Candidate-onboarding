@@ -2,6 +2,9 @@ package com.candidate_onboarding.DTO;
 
 import java.time.LocalDate;
 
+import com.candidate_onboarding.entity.BankInfoEntity;
+import com.candidate_onboarding.entity.QualificationInfoEntity;
+
 public class CandidateOnboardingDTO {
 	
 	
@@ -20,6 +23,9 @@ public class CandidateOnboardingDTO {
 	public String profileImage;
 	public String folderId;
 	public String status;
+	
+	public Long bId;
+	public Long qId;
 	
 	
 	
